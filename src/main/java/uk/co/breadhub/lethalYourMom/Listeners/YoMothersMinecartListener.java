@@ -15,11 +15,14 @@ import java.time.Duration;
 
 public class YoMothersMinecartListener implements Listener {
 
-    private final AmongUs plugin;
+    private AmongUs plugin;
     private final CooldownManager cooldownManager = new CooldownManager();
+
+    private long Kneecap_removal_speed = 1;
 
     public YoMothersMinecartListener(AmongUs plugin) {
         this.plugin = plugin;
+        this.Kneecap_removal_speed = plugin.getConfig().getLong("kneecap_removal_speed");
     }
 
     @EventHandler
@@ -31,12 +34,18 @@ public class YoMothersMinecartListener implements Listener {
         Duration timeLeft = cooldownManager.getRemainingCooldown(entityUUID);
         if (timeLeft.isZero() || timeLeft.isNegative()) {
             if (vehicle instanceof Minecart && vehicle.getVelocity().length() >= 0.2) {
-                plugin.getLogger().info("[+] Minecart: " + entityUUID);
                 String location = "World: " + vehicle.getLocation().getWorld().getName() + ", X: " + (int) vehicle.getLocation().getX() + ", Y: " + (int) vehicle.getLocation().getY() + ", Z: " + (int) vehicle.getLocation().getZ();
-                plugin.getServer().broadcast(BrebUtils.textComponent("[+] Minecart Hit Entity: " + entity.getName() + " At Position: " + location, 0x13f832));
                 LivingEntity entityHit = (LivingEntity) plugin.getServer().getEntity(entity.getUniqueId());
                 assert entityHit != null;
-                if (vehicle.getVelocity().length() >= 1) {
+                plugin.getServer().broadcast(BrebUtils.textComponent(
+                        "[+] Minecart Hit Entity: "
+                                + entity.getName()
+                                + " At Position: "
+                                + location
+                                + " Health: "
+                                + entityHit.getHealth()
+                        , 0x13f832));
+                if (vehicle.getVelocity().length() >= Kneecap_removal_speed) {
                     // who needed their kneecaps anyway
                     entityHit.damage(100);
                 } else {
