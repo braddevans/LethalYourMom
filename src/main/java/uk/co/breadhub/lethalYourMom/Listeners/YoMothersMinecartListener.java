@@ -37,6 +37,7 @@ public class YoMothersMinecartListener implements Listener {
                 LivingEntity entityHit = (LivingEntity) plugin.getServer().getEntity(entity.getUniqueId());
                 assert entityHit != null;
                 if (vehicle.getVelocity().length() >= 1) {
+                    // who needed their kneecaps anyway
                     entityHit.damage(100);
                 } else {
                     entityHit.damage(10);
