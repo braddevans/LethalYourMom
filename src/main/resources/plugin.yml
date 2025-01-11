@@ -1,0 +1,20 @@
+name: LethalYourMom
+version: '1.0-SNAPSHOT'
+main: uk.co.breadhub.lethalYourMom.AmongUs
+api-version: '1.21'
+prefix: Minecraft Sex Mod
+load: STARTUP
+authors: [ slicedbread_ ]
+description: Donky Penis
+website: breadhub.co.uk
+
+commands:
+  gaysex:
+    permission: lethalyourmom.gaysex
+    aliases: [ gaysex ]
+    usage: /gaysex [player]
+    description: Donky Penis
+
+permissions:
+  lethalyourmom.gaysex:
+    description: Donky Penis
